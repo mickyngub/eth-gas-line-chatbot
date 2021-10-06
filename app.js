@@ -39,6 +39,26 @@ const getTime = () => {
     " (GMT+7)";
   return dateString;
 };
+
+const broadcast = () => {
+  let headers = {
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
+  };
+  let body = {
+    messages: "Test Broadcasting Message...",
+  };
+  request.post(
+    {
+      url: "https://api.line.me/v2/bot/message/broadcast",
+      headers: headers,
+      body: body,
+    },
+    (err, res, body) => {
+      console.log("status = " + res.statusCode);
+    }
+  );
+};
 const reply = (reply_token, msg) => {
   let headers = {
     "Content-Type": "application/json",
@@ -67,7 +87,7 @@ const reply = (reply_token, msg) => {
       messages: [
         {
           type: "text",
-          text: `${msg} is not a command, please type "gas" for checking gas fee`,
+          text: `${msg} is not a command, please type "gas" to check gas fee`,
         },
       ],
     });
@@ -120,4 +140,5 @@ app.post("/webhook", async (req, res) => {
 });
 app.listen(port, () => {
   console.log("listening on port...", port);
+  setInterval(broadcast, 10000);
 });
