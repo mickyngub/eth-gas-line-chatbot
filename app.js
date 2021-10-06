@@ -11,9 +11,9 @@ const gasNoti = setInterval(async () => {
   broadcast("broadcast", gasFee);
 }, 90000);
 
-const checkGasFeeBelow150gwei = setInterval(async () => {
+const checkGasFeeBelow50gwei = setInterval(async () => {
   let gasFee = await getGas();
-  if (gasFee.SafeGasPrice < 150) {
+  if (gasFee.SafeGasPrice < 50) {
     broadcast("cheapGas", gasFee);
   }
 }, 10000);
@@ -28,9 +28,9 @@ app.post("/webhook", async (req, res) => {
       let gasFee = await getGas();
       reply(reply_token, gasFee);
       break;
-    case "clearnoti":
-      clearInterval(gasNoti);
-      break;
+    // case "clearnoti":
+    //   clearInterval(gasNoti);
+    //   break;
     default:
       console.log("incoming msg", req.body.events[0].message.text);
       reply(reply_token, req.body.events[0].message.text);
