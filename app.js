@@ -45,27 +45,14 @@ const getGas = async () => {
   } catch (err) {
     console.log("error occurrded", err);
   }
-
-  //   request(
-  //     "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken",
-  //     { json: true },
-  //     (err, response, body) => {
-  //       console.log("statusCode", response.statusCode);
-  //       if (err) {
-  //         console.error("error", err);
-  //       } else {
-  //         console.log("body", body);
-  //         return body.result.safeGasPrice;
-  //       }
-  //     }
-  //   );
 };
 app.post("/webhook", async (req, res) => {
   let reply_token = req.body.events[0].replyToken;
-  console.log("getting gas fee...");
+  console.log(req.body.events[0]);
+  console.log("Getting gas fee...");
   let gasFee = await getGas();
-  console.log("this is gas Fee", gasFee);
-  console.log("replying...");
+  console.log("Gas Fee is ", gasFee);
+  console.log("Replying user...");
   reply(reply_token, gasFee);
   res.sendStatus(200);
 });
