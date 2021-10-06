@@ -5,7 +5,11 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 const { getGas, broadcast, reply } = require("./helpful_functions.js");
-const gasNoti = setInterval(broadcast, 10000);
+
+const gasNoti = setInterval(() => {
+  let gasFee = await getGas();
+  broadcast(gasFee);
+}, 10000);
 
 app.use(bodyParser.urlencoded({ extende: false }));
 app.use(bodyParser.json());

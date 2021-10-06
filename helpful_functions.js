@@ -41,13 +41,24 @@ module.exports = {
     }
   },
 
-  broadcast: function () {
+  broadcast: function (gasFee) {
     let headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
     };
     let body = JSON.stringify({
-      messages: [{ type: "text", text: "Test Broadcasting Message..." }],
+      messages: [
+        {
+          type: "text",
+          text: `Broadcasting Message... Last Block is ${
+            gasFee.LastBlock
+          } ⛓ \r\n\Current Time is ${module.exports.getTime()}\r\n\r\nLow Gas is ${
+            gasFee.SafeGasPrice
+          } gwei 🐌 \r\nAverage Gas is ${
+            gasFee.ProposeGasPrice
+          } gwei 🕛\r\nFast Gas is ${gasFee.FastGasPrice} gwei 🚀`,
+        },
+      ],
     });
 
     request.post(
