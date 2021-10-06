@@ -36,7 +36,7 @@ const reply = (reply_token, msg) => {
       headers: headers,
       body: body,
     },
-    (res) => {
+    (err, res, body) => {
       console.log("status = " + res.statusCode);
     }
   );
