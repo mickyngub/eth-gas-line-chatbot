@@ -32,6 +32,7 @@ app.post("/webhook", async (req, res) => {
     //   clearInterval(gasNoti);
     //   break;
     case "help":
+      console.log("case helping....");
       reply(reply_token, "helping");
       break;
     default:
