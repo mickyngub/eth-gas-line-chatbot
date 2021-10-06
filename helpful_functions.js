@@ -86,6 +86,7 @@ module.exports = {
       Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
     };
     let body;
+    console.log(msg);
     if (msg.SafeGasPrice !== "") {
       body = JSON.stringify({
         replyToken: reply_token,
