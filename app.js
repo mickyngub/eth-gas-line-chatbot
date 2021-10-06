@@ -65,7 +65,7 @@ app.post("/webhook", async (req, res) => {
   if (
     req.body.events[0].message.text.localeCompare("gas", undefined, {
       sensitivity: "accent",
-    })
+    }) === 0
   ) {
     let reply_token = req.body.events[0].replyToken;
     console.log("incoming msg", req.body.events[0].message.text);
