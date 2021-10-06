@@ -17,6 +17,9 @@ app.post("/webhook", async (req, res) => {
       let gasFee = await getGas();
       reply(reply_token, gasFee);
       break;
+    case "clearnoti":
+      clearInterval(gasNoti);
+      break;
     default:
       console.log("incoming msg", req.body.events[0].message.text);
       reply(reply_token, req.body.events[0].message.text);
