@@ -10,11 +10,14 @@ app.use(bodyParser.json());
 
 app.post("/webhook", (req, res) => {
   let reply_token = req.body.events[0].replyToken;
+  console.log("req.body is", req.body);
   let msg = "test message";
   reply(reply_token, msg);
   res.sendStatus(200);
 });
-app.listen(port);
+app.listen(port, () => {
+  console.log("listening on port...", port);
+});
 
 const reply = (reply_token, msg) => {
   let headers = {
