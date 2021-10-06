@@ -87,19 +87,18 @@ module.exports = {
     };
     let body;
     console.log("this is msg", msg);
-    console.log("this is msg");
     if (msg === "helping") {
       body = JSON.stringify({
         replyToken: reply_token,
         messages: [
           {
             type: "text",
-            text: [
-              "🤖ETHEREUM_GAS_BOT_FEE has 3 functionalities",
-              "1. User can type 'gas' in the chat to get the current gas price⛽",
-              "2. The bot will send the gas price with no push notification every 10 minutes📢",
-              "3. The bot will automatically check for gas price below 50gwei and notifies users with push notification every 2 minutes💚",
-            ],
+            text: `
+              "🤖ETHEREUM_GAS_BOT_FEE has 3 functionalities
+              \r\n1. User can type 'gas' in the chat to get the current gas price⛽
+              \r\n2. The bot will send the gas price with no push notification every 10 minutes📢
+              \r\n3. The bot will automatically check for gas price below 50gwei and notifies users with push notification every 2 minutes💚
+            `,
           },
         ],
       });
