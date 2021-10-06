@@ -31,6 +31,9 @@ app.post("/webhook", async (req, res) => {
     // case "clearnoti":
     //   clearInterval(gasNoti);
     //   break;
+    case "help":
+      reply(reply_token, "helping");
+      break;
     default:
       console.log("incoming msg", req.body.events[0].message.text);
       reply(reply_token, req.body.events[0].message.text);
