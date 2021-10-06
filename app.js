@@ -18,7 +18,7 @@ const getGas = async (reply_token) => {
         console.error("error", err);
       } else {
         console.log("body", body);
-        reply(reply_token, body.result);
+        reply(reply_token, body.result.safeGasPrice);
       }
     }
   );
