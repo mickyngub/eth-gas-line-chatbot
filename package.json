@@ -1,0 +1,14 @@
+{
+  "name": "eth-gas-line-chatbot",
+  "version": "1.0.0",
+  "description": "Line chatbot for displaying ethereum gas fee",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pichaya Puttekulangkura",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
