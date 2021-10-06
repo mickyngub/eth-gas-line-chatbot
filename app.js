@@ -19,7 +19,7 @@ const reply = (reply_token, gasResponse) => {
     messages: [
       {
         type: "text",
-        text: `Low Gas is ${gasResponse.safeGasPrice} gwei \r\n Average Gas is ${gasResponse.ProposeGasPrice} \r\n Fast Gas is ${gasResponse.FastGasPrice}`,
+        text: `Low Gas is ${gasResponse.SafeGasPrice} gwei \r\nAverage Gas is ${gasResponse.ProposeGasPrice} gwei\r\nFast Gas is ${gasResponse.FastGasPrice} gwei`,
       },
     ],
   });
