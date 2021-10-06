@@ -11,14 +11,13 @@ app.use(bodyParser.urlencoded({ extende: false }));
 app.use(bodyParser.json());
 
 app.post("/webhook", async (req, res) => {
+  let reply_token = req.body.events[0].replyToken;
   switch (req.body.events[0].message.text.toLowerCase()) {
     case "gas":
-      let reply_token = req.body.events[0].replyToken;
       let gasFee = await getGas();
       reply(reply_token, gasFee);
       break;
     default:
-      let reply_token = req.body.events[0].replyToken;
       console.log("incoming msg", req.body.events[0].message.text);
       reply(reply_token, req.body.events[0].message.text);
       break;
