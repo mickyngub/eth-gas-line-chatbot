@@ -34,7 +34,7 @@ const reply = (reply_token, msg) => {
   );
 };
 
-const getGas = async (reply_token) => {
+const getGas = async () => {
   request(
     "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken",
     { json: true },
@@ -44,14 +44,15 @@ const getGas = async (reply_token) => {
         console.error("error", err);
       } else {
         console.log("body", body);
-        reply(reply_token, body.result.safeGasPrice);
+        return body.result.safeGasPrice;
       }
     }
   );
 };
 app.post("/webhook", (req, res) => {
   let reply_token = req.body.events[0].replyToken;
-  getGas(reply_token);
+  let gasFee = await getGas(reply_token);
+  reply(reply_token, gasFee);
   res.sendStatus(200);
 });
 app.listen(port, () => {
