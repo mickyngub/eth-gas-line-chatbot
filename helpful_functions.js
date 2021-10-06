@@ -53,8 +53,8 @@ module.exports = {
           text:
             `${
               type === "broadcast"
-                ? "Broadcasting Message..."
-                : "✔ GAS FEE BELOW 50 GWEI"
+                ? "Broadcasting Message... \r\n"
+                : "💚 GAS FEE BELOW 50 GWEI! \r\n"
             }` +
             ` Last Block is ${
               gasFee.LastBlock
