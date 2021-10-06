@@ -58,11 +58,11 @@ module.exports = {
             }` +
             `Last Block is ${
               gasFee.LastBlock
-            } ⛓ \r\nCurrent Time is ${module.exports.getTime()}\r\n\r\nLow Gas is ${
+            } ⛓ \r\nCurrent Time is ${module.exports.getTime()}\r\n\r\nLow Gas Price is ${
               gasFee.SafeGasPrice
-            } gwei 🐌 \r\nAverage Gas is ${
+            } gwei 🐌 \r\nAverage Gas Price is ${
               gasFee.ProposeGasPrice
-            } gwei 🕛\r\nFast Gas is ${gasFee.FastGasPrice} gwei 🚀`,
+            } gwei 🕛\r\nFast Gas Price is ${gasFee.FastGasPrice} gwei 🚀`,
         },
       ],
       notificationDisabled: `${type === "broadcast" ? true : false}`,
@@ -92,13 +92,13 @@ module.exports = {
         messages: [
           {
             type: "text",
-            text: `Last Block is ${
+            text: `⛽Current ETH Gas Fee... \r\nLast Block is ${
               msg.LastBlock
-            } ⛓ \r\n\Current Time is ${module.exports.getTime()}\r\n\r\nLow Gas is ${
+            } ⛓ \r\n\Current Time is ${module.exports.getTime()}\r\n\r\nLow Gas Price is ${
               msg.SafeGasPrice
-            } gwei 🐌 \r\nAverage Gas is ${
+            } gwei 🐌 \r\nAverage Gas Price is ${
               msg.ProposeGasPrice
-            } gwei 🕛\r\nFast Gas is ${msg.FastGasPrice} gwei 🚀`,
+            } gwei 🕛\r\nFast Gas Price is ${msg.FastGasPrice} gwei 🚀`,
           },
         ],
       });
