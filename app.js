@@ -21,7 +21,7 @@ const reply = (reply_token, msg) => {
       messages: [
         {
           type: "text",
-          text: `Low Gas is ${msg.SafeGasPrice} gwei 🐌 \r\nAverage Gas is ${msg.ProposeGasPrice} gwei 🕛\r\nFast Gas is ${msg.FastGasPrice} gwei 🚀`,
+          text: `Last Block is ${msg.LastBlock} ⛓ \r\nLow Gas is ${msg.SafeGasPrice} gwei 🐌 \r\nAverage Gas is ${msg.ProposeGasPrice} gwei 🕛\r\nFast Gas is ${msg.FastGasPrice} gwei 🚀`,
         },
       ],
     });
@@ -62,7 +62,11 @@ const getGas = async () => {
   }
 };
 app.post("/webhook", async (req, res) => {
-  if (req.body.events[0].message.text === "gas") {
+  if (
+    req.body.events[0].message.text.localeCompare("gas", undefined, {
+      sensitivity: accent,
+    })
+  ) {
     let reply_token = req.body.events[0].replyToken;
     console.log("incoming msg", req.body.events[0].message.text);
     console.log("Getting gas fee...");
