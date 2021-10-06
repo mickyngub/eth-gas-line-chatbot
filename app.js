@@ -9,7 +9,7 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extende: false }));
 app.use(bodyParser.json());
 
-const reply = (reply_token, msg) => {
+const reply = (reply_token, gasResponse) => {
   let headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
@@ -19,7 +19,7 @@ const reply = (reply_token, msg) => {
     messages: [
       {
         type: "text",
-        text: msg,
+        text: `Low Gas is ${gasResponse.safeGasPrice} gwei \r\n Average Gas is ${gasResponse.ProposeGasPrice} \r\n Fast Gas is ${gasResponse.FastGasPrice}`,
       },
     ],
   });
@@ -41,7 +41,7 @@ const getGas = async () => {
       "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken"
     );
     console.log(response.data);
-    return response.data.result.SafeGasPrice;
+    return response.data.result;
   } catch (err) {
     console.log("error occurrded", err);
   }
