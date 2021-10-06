@@ -18,8 +18,8 @@ const getTime = () => {
   let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
   // current year
   let year = date_ob.getFullYear();
-  // current hours
-  let hours = date_ob.getHours();
+  // current hours, Plus 7 to convert to GMT+7 since heroku server uses UTC
+  let hours = date_ob.getHours() + 7;
   // current minutes
   let minutes = date_ob.getMinutes();
   // current seconds
@@ -35,7 +35,8 @@ const getTime = () => {
     ":" +
     minutes +
     ":" +
-    seconds;
+    seconds +
+    " (GMT+7)";
   return dateString;
 };
 const reply = (reply_token, msg) => {
