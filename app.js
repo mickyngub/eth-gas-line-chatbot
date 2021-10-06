@@ -1,9 +1,10 @@
-import { getGas, broadcast, reply } from "./helpful_functions";
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 4000;
+
+const { getGas, broadcast, reply } = require("./helpful_functions.js");
 
 app.use(bodyParser.urlencoded({ extende: false }));
 app.use(bodyParser.json());
