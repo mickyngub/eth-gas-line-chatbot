@@ -8,27 +8,11 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extende: false }));
 app.use(bodyParser.json());
 
-const getGas = async (reply_token) => {
-  request(
-    "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken",
-    { json: true },
-    (err, response, body) => {
-      console.log("statusCode", response.statusCode);
-      if (err) {
-        console.error("error", err);
-      } else {
-        console.log("body", body);
-        reply(reply_token, body.result.safeGasPrice);
-      }
-    }
-  );
-};
 const reply = (reply_token, msg) => {
   let headers = {
     "Content-Type": "application/json",
     Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
   };
-  console.log("This is headers autho", headers.Authorization);
   let body = JSON.stringify({
     replyToken: reply_token,
     messages: [
@@ -50,6 +34,21 @@ const reply = (reply_token, msg) => {
   );
 };
 
+const getGas = async (reply_token) => {
+  request(
+    "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken",
+    { json: true },
+    (err, response, body) => {
+      console.log("statusCode", response.statusCode);
+      if (err) {
+        console.error("error", err);
+      } else {
+        console.log("body", body);
+        reply(reply_token, body.result.safeGasPrice);
+      }
+    }
+  );
+};
 app.post("/webhook", (req, res) => {
   let reply_token = req.body.events[0].replyToken;
   getGas(reply_token);
