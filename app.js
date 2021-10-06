@@ -19,7 +19,7 @@ const reply = (reply_token, gasResponse) => {
     messages: [
       {
         type: "text",
-        text: `Low Gas is ${gasResponse.SafeGasPrice} gwei \r\nAverage Gas is ${gasResponse.ProposeGasPrice} gwei\r\nFast Gas is ${gasResponse.FastGasPrice} gwei`,
+        text: `Low Gas is ${gasResponse.SafeGasPrice} gwei🐌 \r\nAverage Gas is ${gasResponse.ProposeGasPrice} gwei🕛\r\nFast Gas is ${gasResponse.FastGasPrice} gwei🚀`,
       },
     ],
   });
@@ -48,7 +48,7 @@ const getGas = async () => {
 };
 app.post("/webhook", async (req, res) => {
   let reply_token = req.body.events[0].replyToken;
-  console.log(req.body.events[0]);
+  console.log("incoming msg", req.body.events[0].message.text);
   console.log("Getting gas fee...");
   let gasFee = await getGas();
   console.log("Gas Fee is ", gasFee);
