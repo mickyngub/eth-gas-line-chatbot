@@ -60,16 +60,15 @@ const getGas = async () => {
   //     }
   //   );
 };
-app.post("/webhook", (req, res) => {
+app.post("/webhook", async (req, res) => {
   let reply_token = req.body.events[0].replyToken;
   console.log("getting gas fee...");
-  let gasFee = getGas();
+  let gasFee = await getGas();
   console.log("this is gas Fee", gasFee);
   console.log("replying...");
   reply(reply_token, gasFee);
   res.sendStatus(200);
 });
 app.listen(port, () => {
-  getGas();
   console.log("listening on port...", port);
 });
