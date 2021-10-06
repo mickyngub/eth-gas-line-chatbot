@@ -51,7 +51,10 @@ const getGas = async () => {
 };
 app.post("/webhook", async (req, res) => {
   let reply_token = req.body.events[0].replyToken;
+  console.log("getting gas fee...");
   let gasFee = await getGas(reply_token);
+  console.log("this is gas Fee", gasFee);
+  console.log("replying...");
   reply(reply_token, gasFee);
   res.sendStatus(200);
 });
