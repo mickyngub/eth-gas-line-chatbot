@@ -37,7 +37,7 @@ module.exports = {
       console.log(response.data);
       return response.data.result;
     } catch (err) {
-      console.log("error occurrded", err);
+      console.log("error occurred", err);
     }
   },
 

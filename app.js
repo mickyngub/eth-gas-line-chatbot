@@ -18,7 +18,7 @@ const checkGasFeeBelow50gwei = setInterval(async () => {
   }
 }, 120000);
 
-app.use(bodyParser.urlencoded({ extende: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post("/webhook", async (req, res) => {
@@ -32,11 +32,9 @@ app.post("/webhook", async (req, res) => {
     //   clearInterval(gasNoti);
     //   break;
     case "help":
-      console.log("case helping....");
       reply(reply_token, "helping");
       break;
     default:
-      console.log("incoming msg", req.body.events[0].message.text);
       reply(reply_token, req.body.events[0].message.text);
       break;
   }
