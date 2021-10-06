@@ -9,6 +9,35 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.urlencoded({ extende: false }));
 app.use(bodyParser.json());
 
+const getTime = () => {
+  let date_ob = new Date();
+  // current date
+  // adjust 0 before single digit date
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  // current month
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  // current year
+  let year = date_ob.getFullYear();
+  // current hours
+  let hours = date_ob.getHours();
+  // current minutes
+  let minutes = date_ob.getMinutes();
+  // current seconds
+  let seconds = date_ob.getSeconds();
+  const dateString =
+    year +
+    "-" +
+    month +
+    "-" +
+    date +
+    " " +
+    hours +
+    ":" +
+    minutes +
+    ":" +
+    seconds;
+  return dateString;
+};
 const reply = (reply_token, msg) => {
   let headers = {
     "Content-Type": "application/json",
@@ -21,7 +50,13 @@ const reply = (reply_token, msg) => {
       messages: [
         {
           type: "text",
-          text: `Last Block is ${msg.LastBlock} ⛓ \r\nLow Gas is ${msg.SafeGasPrice} gwei 🐌 \r\nAverage Gas is ${msg.ProposeGasPrice} gwei 🕛\r\nFast Gas is ${msg.FastGasPrice} gwei 🚀`,
+          text: `Last Block is ${
+            msg.LastBlock
+          } ⛓ \r\n\Current Time is ${getTime()}\r\n\r\nLow Gas is ${
+            msg.SafeGasPrice
+          } gwei 🐌 \r\nAverage Gas is ${
+            msg.ProposeGasPrice
+          } gwei 🕛\r\nFast Gas is ${msg.FastGasPrice} gwei 🚀`,
         },
       ],
     });
