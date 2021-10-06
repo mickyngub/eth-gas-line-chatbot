@@ -74,13 +74,7 @@ module.exports = {
         messages: [
           {
             type: "text",
-            text: `Last Block is ${
-              msg.LastBlock
-            } ⛓ \r\n\Current Time is ${this.getTime()}\r\n\r\nLow Gas is ${
-              msg.SafeGasPrice
-            } gwei 🐌 \r\nAverage Gas is ${
-              msg.ProposeGasPrice
-            } gwei 🕛\r\nFast Gas is ${msg.FastGasPrice} gwei 🚀`,
+            text: `Last Block is ${msg.LastBlock} ⛓ \r\n\Current Time is ${this.getTime}\r\n\r\nLow Gas is ${msg.SafeGasPrice} gwei 🐌 \r\nAverage Gas is ${msg.ProposeGasPrice} gwei 🕛\r\nFast Gas is ${msg.FastGasPrice} gwei 🚀`,
           },
         ],
       });
