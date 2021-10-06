@@ -45,9 +45,9 @@ const broadcast = () => {
     "Content-Type": "application/json",
     Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
   };
-  let body = {
+  let body = JSON.stringify({
     messages: [{ type: "text", text: "Test Broadcasting Message..." }],
-  };
+  });
 
   request.post(
     {
