@@ -9,14 +9,14 @@ const { getGas, broadcast, reply } = require("./helpful_functions.js");
 const gasNoti = setInterval(async () => {
   let gasFee = await getGas();
   broadcast("broadcast", gasFee);
-}, 60000);
+}, 600000);
 
-const checkGasFeeBelow100gwei = setInterval(async () => {
+const checkGasFeeBelow50gwei = setInterval(async () => {
   let gasFee = await getGas();
-  if (gasFee.SafeGasPrice < 100) {
+  if (gasFee.SafeGasPrice < 50) {
     broadcast("cheapGas", gasFee);
   }
-}, 10000);
+}, 120000);
 
 app.use(bodyParser.urlencoded({ extende: false }));
 app.use(bodyParser.json());
