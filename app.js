@@ -46,8 +46,9 @@ const broadcast = () => {
     Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
   };
   let body = {
-    messages: "Test Broadcasting Message...",
+    messages: [{ type: "text", text: "Test Broadcasting Message..." }],
   };
+
   request.post(
     {
       url: "https://api.line.me/v2/bot/message/broadcast",
