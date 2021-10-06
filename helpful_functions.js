@@ -41,7 +41,7 @@ module.exports = {
     }
   },
 
-  broadcast: function (gasFee) {
+  broadcast: function (type, gasFee) {
     let headers = {
       "Content-Type": "application/json",
       Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
@@ -50,13 +50,19 @@ module.exports = {
       messages: [
         {
           type: "text",
-          text: `Broadcasting Message... Last Block is ${
-            gasFee.LastBlock
-          } ⛓ \r\n\Current Time is ${module.exports.getTime()}\r\n\r\nLow Gas is ${
-            gasFee.SafeGasPrice
-          } gwei 🐌 \r\nAverage Gas is ${
-            gasFee.ProposeGasPrice
-          } gwei 🕛\r\nFast Gas is ${gasFee.FastGasPrice} gwei 🚀`,
+          text:
+            `${
+              type === "broadcast"
+                ? "Broadcasting Message..."
+                : "✔ GAS FEE BELOW 50 GWEI"
+            }` +
+            ` Last Block is ${
+              gasFee.LastBlock
+            } ⛓ \r\nCurrent Time is ${module.exports.getTime()}\r\n\r\nLow Gas is ${
+              gasFee.SafeGasPrice
+            } gwei 🐌 \r\nAverage Gas is ${
+              gasFee.ProposeGasPrice
+            } gwei 🕛\r\nFast Gas is ${gasFee.FastGasPrice} gwei 🚀`,
         },
       ],
     });

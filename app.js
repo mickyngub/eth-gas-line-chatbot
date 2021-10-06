@@ -8,7 +8,14 @@ const { getGas, broadcast, reply } = require("./helpful_functions.js");
 
 const gasNoti = setInterval(async () => {
   let gasFee = await getGas();
-  broadcast(gasFee);
+  broadcast("broadcast", gasFee);
+}, 90000);
+
+const checkGasFeeBelow150gwei = setInterval(async () => {
+  let gasFee = await getGas();
+  if (gasFee.SafeGasPrice < 150) {
+    broadcast("cheapGas", gasFee);
+  }
 }, 10000);
 
 app.use(bodyParser.urlencoded({ extende: false }));
@@ -29,20 +36,6 @@ app.post("/webhook", async (req, res) => {
       reply(reply_token, req.body.events[0].message.text);
       break;
   }
-
-  // if (
-  //   req.body.events[0].message.text.localeCompare("gas", undefined, {
-  //     sensitivity: "accent",
-  //   }) === 0
-  // ) {
-  //   let reply_token = req.body.events[0].replyToken;
-  //   let gasFee = await getGas();
-  //   reply(reply_token, gasFee);
-  // } else {
-  //   let reply_token = req.body.events[0].replyToken;
-  //   console.log("incoming msg", req.body.events[0].message.text);
-  //   reply(reply_token, req.body.events[0].message.text);
-  // }
 
   res.sendStatus(200);
 });
