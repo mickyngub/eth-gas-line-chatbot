@@ -65,7 +65,7 @@ module.exports = {
             } gwei 🕛\r\nFast Gas is ${gasFee.FastGasPrice} gwei 🚀`,
         },
       ],
-      noficationDisabled: `${type === "broadcast" ? true : false}`,
+      notificationDisabled: `${type === "broadcast" ? true : false}`,
     });
 
     request.post(
