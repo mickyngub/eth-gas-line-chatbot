@@ -6,7 +6,7 @@ const port = process.env.PORT || 4000;
 
 const { getGas, broadcast, reply } = require("./helpful_functions.js");
 
-const gasNoti = setInterval(() => {
+const gasNoti = setInterval(async () => {
   let gasFee = await getGas();
   broadcast(gasFee);
 }, 10000);
