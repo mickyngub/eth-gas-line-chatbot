@@ -52,7 +52,8 @@ const reply = (reply_token, msg) => {
 const getGas = async () => {
   try {
     const response = await axios.get(
-      "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken"
+      "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=" +
+        process.env.ETHERSCAN_TOKEN
     );
     console.log(response.data);
     return response.data.result;
