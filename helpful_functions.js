@@ -86,24 +86,19 @@ module.exports = {
       Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
     };
     let body;
-    console.log(msg);
-    if (msg.SafeGasPrice !== "") {
+    console.log("this is msg", msg);
+    console.log("this is msg");
+    if (msg === "helping") {
       body = JSON.stringify({
         replyToken: reply_token,
         messages: [
           {
             type: "text",
-            text: `⛽Current ETH Gas Fee... \r\nLast Block is ${
-              msg.LastBlock
-            } ⛓ \r\n\Current Time is ${module.exports.getTime()}\r\n\r\nLow Gas Price is ${
-              msg.SafeGasPrice
-            } gwei 🐌 \r\nAverage Gas Price is ${
-              msg.ProposeGasPrice
-            } gwei 🕛\r\nFast Gas Price is ${msg.FastGasPrice} gwei 🚀`,
+            text: `${msg} is not a command, please type "help" to see all the commands`,
           },
         ],
       });
-    } else if (msg === "helping") {
+    } else if (msg.SafeGasPrice) {
       body = JSON.stringify({
         replyToken: reply_token,
         messages: [
@@ -124,7 +119,13 @@ module.exports = {
         messages: [
           {
             type: "text",
-            text: `${msg} is not a command, please type "help" to see all the commands`,
+            text: `⛽Current ETH Gas Fee... \r\nLast Block is ${
+              msg.LastBlock
+            } ⛓ \r\n\Current Time is ${module.exports.getTime()}\r\n\r\nLow Gas Price is ${
+              msg.SafeGasPrice
+            } gwei 🐌 \r\nAverage Gas Price is ${
+              msg.ProposeGasPrice
+            } gwei 🕛\r\nFast Gas Price is ${msg.FastGasPrice} gwei 🚀`,
           },
         ],
       });
