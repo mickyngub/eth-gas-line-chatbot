@@ -9,11 +9,11 @@ const { getGas, broadcast, reply } = require("./helpful_functions.js");
 const gasNoti = setInterval(async () => {
   let gasFee = await getGas();
   broadcast("broadcast", gasFee);
-}, 90000);
+}, 60000);
 
-const checkGasFeeBelow50gwei = setInterval(async () => {
+const checkGasFeeBelow100gwei = setInterval(async () => {
   let gasFee = await getGas();
-  if (gasFee.SafeGasPrice < 50) {
+  if (gasFee.SafeGasPrice < 100) {
     broadcast("cheapGas", gasFee);
   }
 }, 10000);
