@@ -40,7 +40,8 @@ const getGas = async () => {
     const response = await axios.get(
       "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=YourApiKeyToken"
     );
-    console.log(response);
+    console.log(response.data);
+    return response.data.result.SafeGasPrice;
   } catch (err) {
     console.log("error occurrded", err);
   }
