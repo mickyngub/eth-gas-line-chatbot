@@ -94,16 +94,6 @@ module.exports = {
         messages: [
           {
             type: "text",
-            text: `${msg} is not a command, please type "help" to see all the commands`,
-          },
-        ],
-      });
-    } else if (msg.SafeGasPrice) {
-      body = JSON.stringify({
-        replyToken: reply_token,
-        messages: [
-          {
-            type: "text",
             text: [
               "🤖ETHEREUM_GAS_BOT_FEE has 3 functionalities",
               "1. User can type 'gas' in the chat to get the current gas price⛽",
@@ -113,7 +103,7 @@ module.exports = {
           },
         ],
       });
-    } else {
+    } else if (msg.SafeGasPrice) {
       body = JSON.stringify({
         replyToken: reply_token,
         messages: [
@@ -126,6 +116,16 @@ module.exports = {
             } gwei 🐌 \r\nAverage Gas Price is ${
               msg.ProposeGasPrice
             } gwei 🕛\r\nFast Gas Price is ${msg.FastGasPrice} gwei 🚀`,
+          },
+        ],
+      });
+    } else {
+      body = JSON.stringify({
+        replyToken: reply_token,
+        messages: [
+          {
+            type: "text",
+            text: `${msg} is not a command, please type "help" to see all the commands`,
           },
         ],
       });
