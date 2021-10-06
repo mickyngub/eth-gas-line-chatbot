@@ -53,7 +53,7 @@ module.exports = {
           text:
             `${
               type === "broadcast"
-                ? "ETH gas fee noti every 10 minutes... \r\n"
+                ? "📢ETH Gas Fee Every 10 mins... \r\n"
                 : "💚 GAS FEE BELOW 50 GWEI! \r\n"
             }` +
             `Last Block is ${
