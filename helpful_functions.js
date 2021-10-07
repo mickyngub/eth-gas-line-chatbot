@@ -34,7 +34,6 @@ module.exports = {
         "https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=" +
           process.env.ETHERSCAN_TOKEN
       );
-      console.log(response.data);
       return response.data.result;
     } catch (err) {
       console.log("error occurred", err);
@@ -92,6 +91,7 @@ module.exports = {
       Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
     };
     let body;
+    let log;
     console.log("this is msg", msg);
     if (msg === "helping") {
       body = JSON.stringify({
@@ -114,6 +114,7 @@ module.exports = {
           },
         ],
       });
+      log = " successfully sending help instructions....";
     } else if (msg.SafeGasPrice) {
       body = JSON.stringify({
         replyToken: reply_token,
@@ -130,6 +131,7 @@ module.exports = {
           },
         ],
       });
+      log = " successfully sending real-time eth gas fee....";
     } else {
       body = JSON.stringify({
         replyToken: reply_token,
@@ -140,6 +142,7 @@ module.exports = {
           },
         ],
       });
+      log = " successfully sending help commands....";
     }
 
     request.post(
@@ -149,11 +152,7 @@ module.exports = {
         body: body,
       },
       (err, res, body) => {
-        console.log(
-          "status = " +
-            res.statusCode +
-            " successfully replying real-time eth gas fee"
-        );
+        console.log("status = " + res.statusCode + log);
       }
     );
   },
