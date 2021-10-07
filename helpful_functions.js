@@ -39,7 +39,7 @@ module.exports = {
   //Check whether it's 6am or not, if it is then returns true, else return false
   checkGoldAvailableTime: function () {
     let date_ob_UTC = new Date();
-    let date_ob_GMT7 = convertTimezone(date_ob_UTC, "Asia/Bangkok");
+    let date_ob_GMT7 = convertTimeZone(date_ob_UTC, "Asia/Bangkok");
     let hours = date_ob_GMT7.getHours();
     if (hours === 6) {
       return true;
