@@ -75,7 +75,13 @@ module.exports = {
         body: body,
       },
       (err, res, body) => {
-        console.log("status = " + res.statusCode);
+        console.log(
+          `status = ${res.statusCode} successfully ${
+            type === "broadcast"
+              ? "broadcasting gas fee..."
+              : "send gas below 50 alert..."
+          }`
+        );
       }
     );
   },
@@ -143,7 +149,11 @@ module.exports = {
         body: body,
       },
       (err, res, body) => {
-        console.log("status = " + res.statusCode);
+        console.log(
+          "status = " +
+            res.statusCode +
+            " successfully replying real-time eth gas fee"
+        );
       }
     );
   },
