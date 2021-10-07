@@ -90,6 +90,8 @@ module.exports = {
             break;
           default:
             console.log("unknown error occurred ", res.statusCode);
+            console.log("errors...", err);
+
             break;
         }
       }
@@ -172,6 +174,7 @@ module.exports = {
             break;
           default:
             console.log("unknown error occurred ", res.statusCode);
+            console.log("errors...", err);
             break;
         }
       }
