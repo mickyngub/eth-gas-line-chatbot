@@ -44,7 +44,7 @@ module.exports = {
       "Asia/Bangkok"
     );
     let hours = date_ob_GMT7.getHours();
-    if (hours === 23) {
+    if (hours === 6) {
       return true;
     }
     return false;

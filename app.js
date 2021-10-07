@@ -32,13 +32,13 @@ const pingAppEvery29mins = setInterval(async () => {
     let pingGoldResponse = await axios.get(
       "https://gold-hsh-line-chatbot.herokuapp.com/webhook"
     );
-    console.log("...ping gold!", pingGoldResponse);
+    console.log("...ping gold! status = ", pingGoldResponse.status);
   }
   let pingEthResponse = await axios.get(
     "https://eth-gas-line-chatbot.herokuapp.com/webhook"
   );
-  console.log("...ping eth!", pingEthResponse);
-}, 10000);
+  console.log("...ping eth! status = ", pingEthResponse.status);
+}, 1740000);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
