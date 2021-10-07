@@ -21,7 +21,7 @@ const checkGasFeeBelow50gwei = setInterval(async () => {
 const pingAppEvery29mins = setInterval(async () => {
   await axios.get("https://eth-gas-line-chatbot.herokuapp.com/webhook");
   console.log("...ping!");
-}, 30000);
+}, 1740000);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
