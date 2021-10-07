@@ -6,6 +6,7 @@ module.exports = {
     return new Date(date.toLocaleString("en-US", { timeZone: tzString }));
   },
   getTime: function () {
+    //This depends on the server, since it runs on HEROKU the time is UTC and needs to convert to GMT+7
     let date_ob_UTC = new Date();
     let date_ob_GMT7 = module.exports.convertTimeZone(
       date_ob_UTC,
@@ -33,6 +34,17 @@ module.exports = {
       seconds +
       " (GMT+7)";
     return dateString;
+  },
+
+  //Check whether it's 6am or not, if it is then returns true, else return false
+  checkGoldAvailableTime: function () {
+    let date_ob_UTC = new Date();
+    let date_ob_GMT7 = convertTimezone(date_ob_UTC, "Asia/Bangkok");
+    let hours = date_ob_GMT7.getHours();
+    if (hours === 6) {
+      return true;
+    }
+    return false;
   },
 
   getGas: async function () {

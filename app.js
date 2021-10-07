@@ -4,7 +4,12 @@ const axios = require("axios");
 const app = express();
 const port = process.env.PORT || 4000;
 
-const { getGas, broadcast, reply } = require("./helpful_functions.js");
+const {
+  getGas,
+  broadcast,
+  reply,
+  checkGoldAvailableTime,
+} = require("./helpful_functions.js");
 
 const gasNoti = setInterval(async () => {
   let gasFee = await getGas();
@@ -19,8 +24,15 @@ const checkGasFeeBelow50gwei = setInterval(async () => {
 }, 120000);
 
 const pingAppEvery29mins = setInterval(async () => {
+  //goldOpen is true if the time is 6am
+  let goldOpen = checkGoldAvailableTime();
+  //ping gold-hsh-line-chatbot to start gold server
+  if (goldOpen) {
+    await axios.get("https://gold-hsh-line-chatbot.herokuapp.com/webhook");
+    console.log("...ping gold!");
+  }
   await axios.get("https://eth-gas-line-chatbot.herokuapp.com/webhook");
-  console.log("...ping!");
+  console.log("...ping eth!");
 }, 1740000);
 
 app.use(express.urlencoded({ extended: false }));
