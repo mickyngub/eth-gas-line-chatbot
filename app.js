@@ -24,11 +24,11 @@ const checkGasFeeBelow50gwei = setInterval(async () => {
 }, 120000);
 
 const pingAppEvery29mins = setInterval(async () => {
-  //goldOpen is true if the time is 6am
-  let goldOpen = checkGoldAvailableTime();
-  console.log("goldOpen status is ", goldOpen);
+  //timeToPingGold is true if the time is 6am
+  let timeToPingGold = checkGoldAvailableTime();
+  console.log("timeToPingGold status is ", timeToPingGold);
   //ping gold-hsh-line-chatbot to start gold server
-  if (goldOpen) {
+  if (timeToPingGold) {
     await axios.get("https://gold-hsh-line-chatbot.herokuapp.com/webhook");
     console.log("...ping gold!");
   }
