@@ -17,8 +17,8 @@ module.exports = {
     let month = ("0" + (date_ob_GMT7.getMonth() + 1)).slice(-2);
     let year = date_ob_GMT7.getFullYear();
     // current hours, Plus 7 to convert to GMT+7 since heroku server uses UTC
-    let hours = date_ob_GMT7.getHours();
-    let minutes = date_ob_GMT7.getMinutes();
+    let hours = ("0" + date_ob_GMT7.getHours()).slice(-2);
+    let minutes = ("0" + date_ob_GMT7.getMinutes()).slice(-2);
     let seconds = ("0" + date_ob_GMT7.getSeconds()).slice(-2);
     const dateString =
       year +
