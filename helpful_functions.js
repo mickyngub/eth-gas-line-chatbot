@@ -92,7 +92,6 @@ module.exports = {
     };
     let body;
     let log;
-    console.log("this is msg", msg);
     if (msg === "helping") {
       body = JSON.stringify({
         replyToken: reply_token,
