@@ -74,13 +74,24 @@ module.exports = {
         body: body,
       },
       (err, res, body) => {
-        console.log(
-          `status = ${res.statusCode} successfully ${
-            type === "broadcast"
-              ? "broadcasting gas fee..."
-              : "send gas below 50 alert..."
-          }`
-        );
+        switch (res.statusCode) {
+          case 200:
+            console.log(
+              `status = ${res.statusCode} successfully ${
+                type === "broadcast"
+                  ? "broadcasting gas fee..."
+                  : "send gas below 50 alert..."
+              }`
+            );
+            break;
+          case 400:
+            console.log("status = " + res.statusCode + " bad request");
+            console.log("errors...", err);
+            break;
+          default:
+            console.log("unknown error occurred ", res.statusCode);
+            break;
+        }
       }
     );
   },
@@ -151,7 +162,18 @@ module.exports = {
         body: body,
       },
       (err, res, body) => {
-        console.log("status = " + res.statusCode + log);
+        switch (res.statusCode) {
+          case 200:
+            console.log("status = " + res.statusCode + log);
+            break;
+          case 400:
+            console.log("status = " + res.statusCode + " bad request");
+            console.log("errors...", err);
+            break;
+          default:
+            console.log("unknown error occurred ", res.statusCode);
+            break;
+        }
       }
     );
   },
