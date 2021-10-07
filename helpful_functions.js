@@ -91,7 +91,6 @@ module.exports = {
           default:
             console.log("unknown error occurred ", res.statusCode);
             console.log("errors...", err);
-
             break;
         }
       }
