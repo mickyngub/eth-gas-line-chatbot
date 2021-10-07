@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
 const axios = require("axios");
 const app = express();
 const port = process.env.PORT || 4000;
@@ -24,8 +23,8 @@ const pingAppEvery29mins = setInterval(() => {
   console.log("...ping!");
 }, 17400000);
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.post("/webhook", async (req, res) => {
   let reply_token = req.body.events[0].replyToken;
