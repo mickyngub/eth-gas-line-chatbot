@@ -2,16 +2,23 @@ const request = require("request");
 const axios = require("axios");
 
 module.exports = {
+  convertTimeZone: function (date, tzString) {
+    return new Date(date.toLocaleString("en-US", { timeZone: tzString }));
+  },
   getTime: function () {
-    let date_ob = new Date();
+    let date_ob_UTC = new Date();
+    let date_ob_GMT7 = module.exports.convertTimeZone(
+      date_ob_UTC,
+      "Asia/Bangkok"
+    );
     // adjust 0 before single digit date
-    let date = ("0" + date_ob.getDate()).slice(-2);
-    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-    let year = date_ob.getFullYear();
+    let date = ("0" + date_ob_GMT7.getDate()).slice(-2);
+    let month = ("0" + (date_ob_GMT7.getMonth() + 1)).slice(-2);
+    let year = date_ob_GMT7.getFullYear();
     // current hours, Plus 7 to convert to GMT+7 since heroku server uses UTC
-    let hours = date_ob.getHours() + 7;
-    let minutes = date_ob.getMinutes();
-    let seconds = ("0" + date_ob.getSeconds()).slice(-2);
+    let hours = date_ob_GMT7.getHours();
+    let minutes = date_ob_GMT7.getMinutes();
+    let seconds = ("0" + date_ob_GMT7.getSeconds()).slice(-2);
     const dateString =
       year +
       "-" +
