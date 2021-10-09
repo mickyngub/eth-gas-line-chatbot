@@ -3,6 +3,8 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 const port = process.env.PORT || 5000;
+let broadcastCounter = 0;
+let halfMinElapsed = 0;
 
 const {
   getGas,
@@ -13,21 +15,23 @@ const {
 const gasNoti = setInterval(async () => {
   let gasFee = await getGas();
   broadcast("broadcast", gasFee);
+  broadcastCounter += 1;
+  console.log("Broadcast counter = ", broadcastCounter);
 }, 1800000);
-
-let minElapsed=0;
 
 const checkGasFeeBelow50gwei = setInterval(async () => {
   let gasFee = await getGas();
   // minElapsed = Math.max(0, minElapsed);
-  let delay15mins = minElapsed >= 15 ? true : false
+  let delay15mins = halfMinElapsed >= 30 ? true : false
   if (gasFee.SafeGasPrice < 50 && delay15mins) {
     broadcast("cheapGas", gasFee);
     clearInterval(checkGasFeeBelow50gwei);
-    minElapsed = 0;
+    broadcastCounter += 1;
+    halfMinElapsed = 0;
+    console.log("Broadcast counter = ", broadcastCounter);
   }
   minElapsed += 1;
-}, 60000);
+}, 30000);
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
