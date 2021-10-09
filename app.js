@@ -47,8 +47,9 @@ app.get("/webhook", (req, res) => {
 });
 
 app.listen(port, async () => {
-  console.log("listening on port...", port);
+  console.log("Raspberry-pi server is listening on port...", port);
   // let gas = await getGas();
   // console.log("this is gas", gas)
-  
+  let gasFee = await getGas();
+  broadcast("broadcast", gasFee);
 });
