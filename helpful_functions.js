@@ -74,7 +74,7 @@ module.exports = {
           text:
             `${
               type === "broadcast"
-                ? "📢ETH Gas Fee Every 10 mins... \r\n"
+                ? "📢ETH Gas Fee Every 30 mins... \r\n"
                 : "💚 GAS FEE BELOW 50 GWEI! \r\n"
             }` +
             `Last Block is ${
@@ -135,13 +135,13 @@ module.exports = {
             text: `🤖ETHEREUM_GAS_BOT_FEE by @mickyngub has 3 functionalities
               \r\n1. User can type "gas" in the chat to get the current gas price⛽
               \r\n2. The bot will automatically check the gas price every 2 minutes, if the gas price is below 50gwei, it will notify users with push notification💚
-              \r\n3. The bot will send the gas price with no push notification every 10 minutes📢
+              \r\n3. The bot will send the gas price with no push notification every 30 minutes📢
               \r\nFor further information please contact me @mickyngub in Twitter
 
               \r\n🤖ETHEREUM_GAS_BOT_FEE by @mickyngub มีสามฟังก์ชั่นหลัก
               \r\n1. คุณสามารถพิมพ์คำว่า "gas" ลงในช่องแชทเพื่อเชคราคาแก๊สในขณะนี้⛽
               \r\n2. บอทจะคอยเชคราคาแก๊สทุกๆสองนาที หากราคาแก๊สต่ำกว่า 50gwei บอทจะส่งข้อความแจ้งเตือนหาคุณทันที💚
-              \r\n3. บอทจะคอยเชคและส่งราคาแก๊สให้คุณทุกๆสิบนาที โดยบอทจะส่งข้อความแจ้งเตือนแบบไม่มีเสียง📢
+              \r\n3. บอทจะคอยเชคและส่งราคาแก๊สให้คุณทุกๆสามสิบนาที โดยบอทจะส่งข้อความแจ้งเตือนแบบไม่มีเสียง📢
               \r\nหากมีคำถามเพิ่มเติมสามารถติดต่อผมได้ที่ @mickyngub ในทวิตเตอร์
             `,
           },
