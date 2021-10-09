@@ -36,20 +36,6 @@ module.exports = {
     return dateString;
   },
 
-  //Check whether it's 6am or not, if it is then returns true, else return false
-  checkGoldAvailableTime: function () {
-    let date_ob_UTC = new Date();
-    let date_ob_GMT7 = module.exports.convertTimeZone(
-      date_ob_UTC,
-      "Asia/Bangkok"
-    );
-    let hours = date_ob_GMT7.getHours();
-    if (hours === 6) {
-      return true;
-    }
-    return false;
-  },
-
   getGas: async function () {
     try {
       const response = await axios.get(
@@ -105,89 +91,6 @@ module.exports = {
                   : "send gas below 50 alert..."
               }`
             );
-            break;
-          case 400:
-            console.log("status = " + res.statusCode + " bad request");
-            console.log("errors...", err);
-            break;
-          default:
-            console.log("unknown error occurred ", res.statusCode);
-            console.log("errors...", err);
-            break;
-        }
-      }
-    );
-  },
-
-  reply: function (reply_token, msg) {
-    let headers = {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + process.env.CHANNEL_ACCESS_TOKEN,
-    };
-    let body;
-    let log;
-    if (msg === "helping") {
-      body = JSON.stringify({
-        replyToken: reply_token,
-        messages: [
-          {
-            type: "text",
-            text: `🤖ETHEREUM_GAS_BOT_FEE by @mickyngub has 3 functionalities
-              \r\n1. User can type "gas" in the chat to get the current gas price⛽
-              \r\n2. The bot will automatically check the gas price every 2 minutes, if the gas price is below 50gwei, it will notify users with push notification💚
-              \r\n3. The bot will send the gas price with no push notification every 30 minutes📢
-              \r\nFor further information please contact me @mickyngub in Twitter
-
-              \r\n🤖ETHEREUM_GAS_BOT_FEE by @mickyngub มีสามฟังก์ชั่นหลัก
-              \r\n1. คุณสามารถพิมพ์คำว่า "gas" ลงในช่องแชทเพื่อเชคราคาแก๊สในขณะนี้⛽
-              \r\n2. บอทจะคอยเชคราคาแก๊สทุกๆสองนาที หากราคาแก๊สต่ำกว่า 50gwei บอทจะส่งข้อความแจ้งเตือนหาคุณทันที💚
-              \r\n3. บอทจะคอยเชคและส่งราคาแก๊สให้คุณทุกๆสามสิบนาที โดยบอทจะส่งข้อความแจ้งเตือนแบบไม่มีเสียง📢
-              \r\nหากมีคำถามเพิ่มเติมสามารถติดต่อผมได้ที่ @mickyngub ในทวิตเตอร์
-            `,
-          },
-        ],
-      });
-      log = " successfully sending help instructions....";
-    } else if (msg.SafeGasPrice) {
-      body = JSON.stringify({
-        replyToken: reply_token,
-        messages: [
-          {
-            type: "text",
-            text: `⛽Current ETH Gas Fee... \r\nLast Block is ${
-              msg.LastBlock
-            } ⛓ \r\n\Current Time is ${module.exports.getTime()}\r\n\r\nLow Gas Price is ${
-              msg.SafeGasPrice
-            } gwei 🐌 \r\nAverage Gas Price is ${
-              msg.ProposeGasPrice
-            } gwei 🕛\r\nFast Gas Price is ${msg.FastGasPrice} gwei 🚀`,
-          },
-        ],
-      });
-      log = " successfully sending real-time eth gas fee....";
-    } else {
-      body = JSON.stringify({
-        replyToken: reply_token,
-        messages: [
-          {
-            type: "text",
-            text: `${msg} is not a command, please type "help" to see all the commands`,
-          },
-        ],
-      });
-      log = " successfully sending help commands....";
-    }
-
-    request.post(
-      {
-        url: "https://api.line.me/v2/bot/message/reply",
-        headers: headers,
-        body: body,
-      },
-      (err, res, body) => {
-        switch (res.statusCode) {
-          case 200:
-            console.log("status = " + res.statusCode + log);
             break;
           case 400:
             console.log("status = " + res.statusCode + " bad request");
