@@ -16,7 +16,7 @@ const gasNoti = setInterval(async () => {
   broadcast("broadcast", gasFee);
   broadcastCounter += 1;
   console.log("Broadcast counter = ", broadcastCounter);
-}, 1800000);
+}, 3600000);
 
 const checkGasFeeBelow50gwei = setInterval(async () => {
   let gasFee = await getGas();
@@ -50,4 +50,5 @@ app.listen(port, async () => {
   console.log("listening on port...", port);
   // let gas = await getGas();
   // console.log("this is gas", gas)
+  
 });
