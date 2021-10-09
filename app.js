@@ -47,26 +47,6 @@ app.get("/webhook", (req, res) => {
   res.send("...ping!!!");
 });
 
-app.post("/webhook", async (req, res) => {
-  let reply_token = req.body.events[0].replyToken;
-  switch (req.body.events[0].message.text.toLowerCase()) {
-    case "gas":
-      let gasFee = await getGas();
-      reply(reply_token, gasFee);
-      break;
-    // case "clearnoti":
-    //   clearInterval(gasNoti);
-    //   break;
-    case "help":
-      reply(reply_token, "helping");
-      break;
-    default:
-      reply(reply_token, req.body.events[0].message.text);
-      break;
-  }
-
-  res.sendStatus(200);
-});
 app.listen(port, async () => {
   console.log("listening on port...", port);
   // let gas = await getGas();
