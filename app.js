@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 const {
   getGas,
@@ -14,14 +14,21 @@ const {
 const gasNoti = setInterval(async () => {
   let gasFee = await getGas();
   broadcast("broadcast", gasFee);
-}, 600000);
+}, 1800000);
+
+let minElapsed=0;
 
 const checkGasFeeBelow50gwei = setInterval(async () => {
   let gasFee = await getGas();
-  if (gasFee.SafeGasPrice < 50) {
+  // minElapsed = Math.max(0, minElapsed);
+  let delay15mins = minElapsed >= 15 ? true : false
+  if (gasFee.SafeGasPrice < 50 && delay15mins) {
     broadcast("cheapGas", gasFee);
+    clearInterval(checkGasFeeBelow50gwei);
+    minElapsed = 0;
   }
-}, 120000);
+  minElapsed += 1;
+}, 60000);
 
 const pingAppEvery29mins = setInterval(async () => {
   //timeToPingGold is true if the time is 6am
@@ -43,6 +50,13 @@ const pingAppEvery29mins = setInterval(async () => {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  console.log("get /")
+  res.send(
+
+    "welcome to the frontpage..."
+  )
+})
 app.get("/webhook", (req, res) => {
   res.send("...ping!!!");
 });
@@ -67,6 +81,8 @@ app.post("/webhook", async (req, res) => {
 
   res.sendStatus(200);
 });
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log("listening on port...", port);
+  // let gas = await getGas();
+  // console.log("this is gas", gas)
 });
