@@ -9,7 +9,6 @@ let halfMinElapsed = 0;
 const {
   getGas,
   broadcast,
-  reply,
 } = require("./helpful_functions.js");
 
 const gasNoti = setInterval(async () => {
