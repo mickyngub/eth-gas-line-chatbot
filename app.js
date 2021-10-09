@@ -8,7 +8,6 @@ const {
   getGas,
   broadcast,
   reply,
-  checkGoldAvailableTime,
 } = require("./helpful_functions.js");
 
 const gasNoti = setInterval(async () => {
