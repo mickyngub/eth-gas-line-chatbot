@@ -29,7 +29,7 @@ const checkGasFeeBelow50gwei = setInterval(async () => {
     halfMinElapsed = 0;
     console.log("Broadcast counter = ", broadcastCounter);
   }
-  minElapsed += 1;
+  halfMinElapsed += 1;
 }, 30000);
 
 app.use(express.urlencoded({ extended: false }));
