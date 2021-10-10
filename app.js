@@ -8,6 +8,7 @@ let halfMinElapsed = 0;
 
 const {
   getGas,
+  getTime,
   broadcast,
 } = require("./helpful_functions.js");
 
@@ -15,7 +16,7 @@ const gasNoti = setInterval(async () => {
   let gasFee = await getGas();
   broadcast("broadcast", gasFee);
   broadcastCounter += 1;
-  console.log("Broadcast counter = ", broadcastCounter);
+  console.log(`${getTime()} Broadcastcounter is ${broadcastCounter}`);
 }, 3600000);
 
 const checkGasFeeBelow50gwei = setInterval(async () => {
@@ -26,7 +27,7 @@ const checkGasFeeBelow50gwei = setInterval(async () => {
     broadcast("cheapGas", gasFee);
     broadcastCounter += 1;
     halfMinElapsed = 0;
-    console.log("Broadcast counter = ", broadcastCounter);
+    console.log(`${getTime()} Broadcastcounter is ${broadcastCounter}`);
   }
   halfMinElapsed += 1;
 }, 30000);
