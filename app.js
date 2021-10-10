@@ -24,7 +24,6 @@ const checkGasFeeBelow50gwei = setInterval(async () => {
   let delay15mins = halfMinElapsed >= 30 ? true : false
   if (gasFee.SafeGasPrice < 50 && delay15mins) {
     broadcast("cheapGas", gasFee);
-    clearInterval(checkGasFeeBelow50gwei);
     broadcastCounter += 1;
     halfMinElapsed = 0;
     console.log("Broadcast counter = ", broadcastCounter);
